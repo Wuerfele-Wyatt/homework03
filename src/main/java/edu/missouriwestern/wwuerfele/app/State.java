@@ -1,5 +1,12 @@
 package edu.missouriwestern.wwuerfele.app;
 
+/**
+ * This is a State POJO. It features parameters found in a test SQL file.
+ *
+ * @author Wyatt Wuerfele
+ * @since February 2025
+ */
+
 import java.time.LocalDate;
 import java.util.Objects;
 
