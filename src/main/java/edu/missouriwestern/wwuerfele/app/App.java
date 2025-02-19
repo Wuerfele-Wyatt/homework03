@@ -23,7 +23,6 @@ public class App {
             printList(states, "States");
 
             writeMarkdown(states, pageTitle, columnHeaders, fileName);
-            writeHTML(states, pageTitle, columnHeaders, "states.html");
 
         }catch(Exception e){
             System.err.println(e.getMessage());
@@ -35,6 +34,17 @@ public class App {
         System.out.println("Done");
 
     }//end of main
+
+    /**
+     * Retrieves state data from SQL database and adds to array list
+     *
+     * @author Wyatt Wuerfele
+     * @since February 2025
+     * @param states
+     * @param credentials
+     * @param query
+     * @throws SQLException
+     */
 
     private static void retrieveStates(ArrayList<String> states, Credentials credentials, String query) throws SQLException {
         String connectionURL = "jdbc:mariadb://woz.csmp.missouriwestern.edu:3306/misc";
@@ -64,6 +74,9 @@ public class App {
      *
      * This takes the arg list and reads the file. It then attempts
      * to read the file
+     *
+     * @author Wyatt Wuerfele
+     * @since February 2025
      * @param args -- This should be the args array from main()
      * @return -- Returns a credential. If credential file was flawed then Username: ??? Password: !!!
      * @throws EmptyCommandLineException
