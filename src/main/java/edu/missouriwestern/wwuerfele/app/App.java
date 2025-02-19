@@ -7,15 +7,23 @@ import java.nio.file.Files;
 import java.sql.*;
 import java.util.ArrayList;
 
+import static edu.missouriwestern.wwuerfele.app.Utility.Toolkit.*;
+
 public class App {
     public static void main(String[] args) {
         ArrayList<String> states = new ArrayList<>();
+        String[] columnHeaders = {"State", "Slug"};
+        String pageTitle = "States";
+        String fileName = "states.md";
         try{
             Credentials credentials = getCredentials(args);
             String query = "SELECT state, slug FROM states";
 
             retrieveStates(states, credentials, query);
-            print(states, "States");
+            printList(states, "States");
+
+            writeMarkdown(states, pageTitle, columnHeaders, fileName);
+            writeHTML(states, pageTitle, columnHeaders, "states.html");
 
         }catch(Exception e){
             System.err.println(e.getMessage());
@@ -44,17 +52,11 @@ public class App {
         while (resultSet.next()) {
             String state = resultSet.getString("state");
             String slug = resultSet.getString("slug");
-            String s = String.format("%s, %s", state, slug);
-            states.add(s);
+            states.add(state);
+            states.add(slug);
         }
     }//end of retrieveStates
-    private static <T> void print(ArrayList<T> list, String title){
-        System.out.println("******" + title + "*****");
-        for(T item : list){
-            System.out.println(item);
-        }
-        System.out.printf("\n%d items \n", list.size());
-    }
+
 
     /**
      * The credentials file must be a single line with the username

@@ -77,11 +77,10 @@ public class Toolkit {
         writer.println();
 
         //write the body of the table
-        for(var item: list){
+        for (int i = 0; i <= list.size()-1; i+=2){
             writer.print("|");
-            for(int i = 0; i<getters.length; i++){
-                writer.printf(" %s |", getters[i].invoke(item));
-            }
+            writer.printf(" %s |", list.get(i));
+            writer.printf(" %s |", list.get(i+1));
             writer.println();
         }
 
@@ -108,7 +107,7 @@ public class Toolkit {
         return gettersArray;
     }//end of getGetters
 
-    public static<T> void writeHTML(ArrayList<T> items, String pageTitle, String[] columnHeaders, String fileName){
+    public static<T> void writeHTML(ArrayList<T> items, String pageTitle, String[] columnHeaders, String fileName) throws InvocationTargetException, IllegalAccessException {
         Class theClass = items.get(0).getClass();
         Method[] getters = getGetters(theClass);
 
